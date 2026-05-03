@@ -1,0 +1,349 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>A Few-Step Generative Model on Cumulative Flow Maps</title>
+    <meta
+      name="description"
+      content="Project page for A Few-Step Generative Model on Cumulative Flow Maps."
+    />
+    <link rel="stylesheet" href="styles.css" />
+    <script>
+      window.MathJax = {
+        tex: { inlineMath: [["\\(", "\\)"], ["$", "$"]] },
+        svg: { fontCache: "global" }
+      };
+    </script>
+    <script
+      defer
+      src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"
+    ></script>
+    <script defer src="script.js"></script>
+  </head>
+  <body>
+    <main>
+      <section class="hero">
+        <div class="hero-inner">
+          <p class="venue">SIGGRAPH 2026</p>
+          <h1>A Few-Step Generative Model on Cumulative Flow Maps</h1>
+          <p class="authors">
+            Zhiqi Li*, Duowen Chen*, Yuchen Sun*, Bo Zhu
+          </p>
+          <p class="tagline">
+            Few-step generation by learning cumulative flow maps for long-range
+            transport, with minimal changes to existing generative models.
+          </p>
+          <div class="links" aria-label="Project links">
+            <a href="assets/cfm-paper.pdf">PDF</a>
+            <a href="#gallery">Gallery</a>
+            <a href="#paper">Paper</a>
+          </div>
+        </div>
+      </section>
+
+      <section class="teaser">
+        <figure>
+          <img src="assets/teaser.png" alt="Cumulative Flow Maps teaser figure" />
+          <figcaption>
+            CFM accelerates geometric distributions, joint prediction, SDF
+            generation, sketch generation, and image generation without changing
+            the model architecture or using distillation.
+          </figcaption>
+        </figure>
+      </section>
+
+      <div class="chapter chapter-intro">
+        <section class="highlights" aria-label="Paper highlights">
+          <h2>Highlights</h2>
+          <div class="highlight-list">
+            <div class="highlight-item">
+              <span>01</span>
+              <p>Cumulative flow maps connect local updates with finite-time transport.</p>
+            </div>
+            <div class="highlight-item">
+              <span>02</span>
+              <p>Applies to DDIM, EDM, \(x_1\)-prediction FM, and \(u\)-prediction FM.</p>
+            </div>
+            <div class="highlight-item">
+              <span>03</span>
+              <p>Few-step generation for graphics applications without distillation.</p>
+            </div>
+          </div>
+        </section>
+
+        <section class="abstract">
+          <h2>Abstract</h2>
+          <p>
+            We propose a unified, few-step generative modeling framework based on
+            cumulative flow maps for long-range transport in probability space,
+            inspired by flow-map techniques for physical transport and dynamics.
+            The cumulative-flow abstraction connects local, instantaneous updates
+            with finite-time transport, enabling generative models to reason about
+            global state transitions.
+          </p>
+          <p>
+            This perspective yields a framework that applies broadly to existing
+            diffusion- and flow-based models without being tied to one prediction
+            form. It supports few-step and one-step generation while preserving
+            synthesis quality, requiring only minimal changes to time embeddings
+            and training objectives and no increase in model capacity.
+          </p>
+        </section>
+
+        <section class="gif-gallery" id="gallery" aria-label="Animated result gallery">
+          <div class="gallery-head">
+            <div>
+              <p class="eyebrow">Animated Results</p>
+              <h2>Few-Step Generation Gallery</h2>
+            </div>
+            <div class="gallery-controls" aria-label="Gallery controls">
+              <button type="button" class="gallery-btn" data-gallery-prev aria-label="Previous GIF">
+                ‹
+              </button>
+              <button type="button" class="gallery-btn" data-gallery-next aria-label="Next GIF">
+                ›
+              </button>
+            </div>
+          </div>
+
+          <div class="gallery-track" data-gallery-track tabindex="0">
+            <figure class="gallery-card" id="gallery-geodist">
+              <img src="assets/gifs/01_geometric_distribution.gif" alt="Geometric distribution generation" />
+              <figcaption>Geometric distribution modeling with CFM-EDM.</figcaption>
+            </figure>
+            <figure class="gallery-card" id="gallery-complex">
+              <img src="assets/gifs/02_meshes_complex_shape.gif" alt="Meshes with complex shapes" />
+              <figcaption>Complex and thin-feature mesh distributions.</figcaption>
+            </figure>
+            <figure class="gallery-card" id="gallery-pdt">
+              <img src="assets/gifs/03_point_distribution_transformation.gif" alt="Point distribution transformation" />
+              <figcaption>Joint prediction through point distribution transformation.</figcaption>
+            </figure>
+            <figure class="gallery-card" id="gallery-joint-more">
+              <img src="assets/gifs/04_more_joint_prediction_results.gif" alt="More joint prediction results" />
+              <figcaption>More joint prediction results with few-step sampling.</figcaption>
+            </figure>
+            <figure class="gallery-card" id="gallery-sdf4-table">
+              <img src="assets/gifs/05_sdf_4step_tables.gif" alt="Four-step SDF table generation" />
+              <figcaption>Functional SDF generation: tables, 4 steps.</figcaption>
+            </figure>
+            <figure class="gallery-card" id="gallery-sdf4-chair">
+              <img src="assets/gifs/06_sdf_4step_chairs.gif" alt="Four-step SDF chair generation" />
+              <figcaption>Functional SDF generation: chairs, 4 steps.</figcaption>
+            </figure>
+            <figure class="gallery-card" id="gallery-sdf4-airplane">
+              <img src="assets/gifs/07_sdf_4step_airplanes.gif" alt="Four-step SDF airplane generation" />
+              <figcaption>Functional SDF generation: airplanes, 4 steps.</figcaption>
+            </figure>
+            <figure class="gallery-card" id="gallery-sdf4-bench">
+              <img src="assets/gifs/08_sdf_4step_benches.gif" alt="Four-step SDF bench generation" />
+              <figcaption>Functional SDF generation: benches, 4 steps.</figcaption>
+            </figure>
+            <figure class="gallery-card" id="gallery-sdf4-guitar">
+              <img src="assets/gifs/09_sdf_4step_guitars.gif" alt="Four-step SDF guitar generation" />
+              <figcaption>Functional SDF generation: guitars, 4 steps.</figcaption>
+            </figure>
+            <figure class="gallery-card" id="gallery-sdf10-table">
+              <img src="assets/gifs/10_sdf_10step_tables.gif" alt="Ten-step SDF table generation" />
+              <figcaption>Functional SDF generation: tables, 10 steps.</figcaption>
+            </figure>
+            <figure class="gallery-card" id="gallery-sdf10-chair">
+              <img src="assets/gifs/11_sdf_10step_chairs.gif" alt="Ten-step SDF chair generation" />
+              <figcaption>Functional SDF generation: chairs, 10 steps.</figcaption>
+            </figure>
+            <figure class="gallery-card" id="gallery-sdf10-airplane">
+              <img src="assets/gifs/12_sdf_10step_airplanes.gif" alt="Ten-step SDF airplane generation" />
+              <figcaption>Functional SDF generation: airplanes, 10 steps.</figcaption>
+            </figure>
+            <figure class="gallery-card" id="gallery-sdf10-bench">
+              <img src="assets/gifs/13_sdf_10step_benches.gif" alt="Ten-step SDF bench generation" />
+              <figcaption>Functional SDF generation: benches, 10 steps.</figcaption>
+            </figure>
+            <figure class="gallery-card" id="gallery-sdf10-guitar">
+              <img src="assets/gifs/14_sdf_10step_guitars.gif" alt="Ten-step SDF guitar generation" />
+              <figcaption>Functional SDF generation: guitars, 10 steps.</figcaption>
+            </figure>
+            <figure class="gallery-card" id="gallery-sketch-rabbit">
+              <img src="assets/gifs/15_sketch_rabbit.gif" alt="Rabbit sketch generation" />
+              <figcaption>Image-conditioned sketch generation.</figcaption>
+            </figure>
+            <figure class="gallery-card" id="gallery-sketch-fish">
+              <img src="assets/gifs/16_sketch_fish.gif" alt="Fish sketch generation" />
+              <figcaption>Vector sketch generation with one-step CFM-DDIM.</figcaption>
+            </figure>
+            <figure class="gallery-card" id="gallery-sketch-cat">
+              <img src="assets/gifs/17_sketch_cat.gif" alt="Cat sketch generation" />
+              <figcaption>Image-conditioned cat sketch generation.</figcaption>
+            </figure>
+            <figure class="gallery-card" id="gallery-image">
+              <img src="assets/gifs/18_unconditional_image_generation.gif" alt="Unconditional CelebA-HQ image generation" />
+              <figcaption>Unconditional image generation on CelebA-HQ.</figcaption>
+            </figure>
+            <figure class="gallery-card" id="gallery-geodist-extra">
+              <img src="assets/gifs/19_additional_geometric_distribution.gif" alt="Additional geometric distribution experiments" />
+              <figcaption>Additional geometric distribution evaluation.</figcaption>
+            </figure>
+            <figure class="gallery-card" id="gallery-pdt-extra">
+              <img src="assets/gifs/20_additional_pdt.gif" alt="Additional PDT comparison" />
+              <figcaption>Additional PDT comparison with large speedups.</figcaption>
+            </figure>
+          </div>
+
+          <nav class="gallery-index" aria-label="Gallery index">
+            <button type="button" data-gallery-target="gallery-geodist">GeoDist1</button>
+            <button type="button" data-gallery-target="gallery-complex">GeoDist2</button>
+            <button type="button" data-gallery-target="gallery-pdt">PDT1</button>
+            <button type="button" data-gallery-target="gallery-joint-more">PDT2</button>
+            <button type="button" data-gallery-target="gallery-sdf4-table">SDF 4-step</button>
+            <button type="button" data-gallery-target="gallery-sdf10-table">SDF 10-step</button>
+            <button type="button" data-gallery-target="gallery-sketch-rabbit">Sketch</button>
+            <button type="button" data-gallery-target="gallery-image">Image</button>
+            <button type="button" data-gallery-target="gallery-geodist-extra">GeoDist Validation</button>
+            <button type="button" data-gallery-target="gallery-pdt-extra">PDT Validation</button>
+          </nav>
+        </section>
+      </div>
+
+      <div class="chapter chapter-method">
+        <div class="chapter-label">Method</div>
+        <section class="method">
+          <div class="section-head">
+            <h2>Cumulative Flow Maps</h2>
+            <p>
+              CFM abstracts the long-range map \(\psi_{t\to r}\) and learns a
+              cumulative parameterization \(m_{t\to r}(x)\) that can be plugged
+              into common generative parameterizations.
+            </p>
+          </div>
+
+          <figure class="wide-figure">
+            <img src="assets/illustration.png" alt="Cumulative Flow Maps method illustration" />
+            <figcaption>
+              CFM turns multi-step sampling trajectories into a few-step
+              generation framework through cumulative transport.
+            </figcaption>
+          </figure>
+
+          <div class="formula-grid">
+            <article class="formula-card">
+              <h3>Instantaneous to cumulative maps</h3>
+              <div class="equation">
+                \[
+                  \psi_{t\to r}
+                  =
+                  \lim_{N\to\infty}
+                  \psi_{t_{N-1}\to t_N}\circ\cdots\circ
+                  \psi_{t_0\to t_1},
+                  \qquad t_0=t,\;t_N=r.
+                \]
+              </div>
+            </article>
+            <article class="formula-card">
+              <h3>Cumulative parameterization</h3>
+              <div class="equation">
+                \[
+                  \psi_{t\to r}(x)
+                  =
+                  F\!\left[m_{t\to r}(x), x, t, r\right].
+                \]
+              </div>
+            </article>
+          </div>
+        </section>
+      </div>
+
+      <div class="chapter chapter-apps">
+        <div class="chapter-label">Applications</div>
+        <section class="applications" id="applications">
+          <div class="section-head">
+            <h2>Applications</h2>
+            <p>
+              The same cumulative-flow idea accelerates different generative
+              models and graphics tasks.
+            </p>
+          </div>
+
+          <div class="app-grid">
+            <article class="app-card">
+              <img src="assets/gifs/01_geometric_distribution.gif" alt="Geometric distribution modeling" />
+              <h3>Geometric Distribution</h3>
+              <p>CFM-EDM achieves high-quality few-step geometric distribution modeling.</p>
+            </article>
+            <article class="app-card">
+              <img src="assets/gifs/03_point_distribution_transformation.gif" alt="Joint prediction" />
+              <h3>Joint Prediction</h3>
+              <p>CFM-DDIM accelerates PDT-style joint generation by up to \(200\times\).</p>
+            </article>
+            <article class="app-card">
+              <img src="assets/gifs/10_sdf_10step_tables.gif" alt="Functional SDF generation" />
+              <h3>Functional SDF Generation</h3>
+              <p>Few-step SDF generation from only 64 surface-conditioning points.</p>
+            </article>
+            <article class="app-card">
+              <img src="assets/gifs/15_sketch_rabbit.gif" alt="Sketch generation" />
+              <h3>Sketch Generation</h3>
+              <p>Image-conditioned vector sketches with one-step and few-step sampling.</p>
+            </article>
+            <article class="app-card">
+              <img src="assets/gifs/18_unconditional_image_generation.gif" alt="CelebA-HQ image generation" />
+              <h3>Image Generation</h3>
+              <p>Few-step unconditional CelebA-HQ generation with CFM-DDIM.</p>
+            </article>
+          </div>
+        </section>
+      </div>
+
+      <div class="chapter chapter-paper">
+        <div class="chapter-label">Paper</div>
+        <section class="paper" id="paper">
+          <div class="section-head">
+            <h2>Paper</h2>
+            <p>The compiled paper is embedded below.</p>
+          </div>
+          <object
+            class="pdf-viewer"
+            data="assets/cfm-paper.pdf"
+            type="application/pdf"
+          >
+            <iframe
+              class="pdf-viewer"
+              src="assets/cfm-paper.pdf"
+              title="Cumulative Flow Maps paper PDF"
+            ></iframe>
+          </object>
+        </section>
+
+        <section class="video" id="video">
+          <div class="section-head">
+            <h2>Video</h2>
+            <p>A placeholder YouTube video is embedded here until the project video is available.</p>
+          </div>
+          <div class="video-frame">
+            <iframe
+              src="https://www.youtube.com/embed/JzozR1t-sIE?feature=oembed"
+              title="Particle-Laden Fluid on Flow Maps"
+              frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allowfullscreen
+            ></iframe>
+          </div>
+          <p class="video-fallback">
+            If the embedded player does not load locally, open the placeholder video on
+            <a href="https://www.youtube.com/watch?v=JzozR1t-sIE">YouTube</a>.
+          </p>
+        </section>
+
+        <section class="citation">
+          <h2>Citation</h2>
+          <pre><code>@article{li2026cumulativeflowmaps,
+  author  = {Li, Zhiqi and Chen, Duowen and Sun, Yuchen and Zhu, Bo},
+  title   = {A Few-Step Generative Model on Cumulative Flow Maps},
+  journal = {ACM Transactions on Graphics},
+  year    = {2026}
+}</code></pre>
+        </section>
+      </div>
+    </main>
+  </body>
+</html>
